@@ -4,17 +4,17 @@ import {useNavigate} from "react-router-dom";
 
 const SingleProduct = ({item}) => {
 
-    const {cart, setCart, price, setPrice} = useContext(mainContext)
+    const {cart, setCart} = useContext(mainContext)
     const nav = useNavigate()
 
     const addToCart = (item) => {
-        if (item.quantity < 1) {
-            item.quantity++
-            setCart([...cart, item])
-            setPrice(price + item.price)
+        const prod = cart.find(x => x.uuid === item.uuid)
+        if (prod) {
+            cart.map(x => x.uuid === item.uuid ? x.quantity++ : x)
+            setCart([...cart])
         } else {
-            item.quantity++
-            setPrice(price + item.price)
+            const newItem = {...item}
+            setCart([...cart, newItem])
         }
     }
 

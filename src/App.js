@@ -12,11 +12,10 @@ function App() {
 
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([])
-    const [price, setPrice] = useState(0)
 
     return (
         <>
-            <mainContext.Provider value={{products, setProducts, cart, setCart, price, setPrice}}>
+            <mainContext.Provider value={{products, setProducts, cart, setCart}}>
                 <BrowserRouter>
                     <nav>
                         <Toolbar />

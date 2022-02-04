@@ -3,26 +3,19 @@ import mainContext from "../Context/MainContext";
 
 const CartSingleProduct = ({item, index}) => {
 
-    const {cart, setCart, price, setPrice} = useContext(mainContext)
+    const {cart, setCart} = useContext(mainContext)
 
     const addToCart = () => {
         cart[index].quantity++
         setCart([...cart])
-        setPrice(price + cart[index].price)
     }
 
     const removeFromCart = () => {
-        if (item.quantity > 1) {
-            cart[index].quantity--
-            setCart([...cart])
-            setPrice(price - cart[index].price)
+        if (cart[index].quantity === 1){
+            setCart(cart.filter((x, i) => i !== index))
         } else {
             cart[index].quantity--
-            setCart(cart.filter((x, i) => i !== index))
-            setPrice(price - cart[index].price)
-            // remove item with splice
-            // cart.splice(index, 1)
-            // setCart([...cart])
+            setCart([...cart])
         }
     }
 

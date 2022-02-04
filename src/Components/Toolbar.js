@@ -4,7 +4,7 @@ import mainContext from "../Context/MainContext";
 
 const Toolbar = () => {
 
-    const {cart, price} = useContext(mainContext)
+    const {cart} = useContext(mainContext)
 
     function itemsTotal() {
         if (cart.length > 0) {
@@ -14,12 +14,18 @@ const Toolbar = () => {
         }
     }
 
+    function priceTotal () {
+            let counter = 0
+            cart.map(x => counter += x.price * x.quantity)
+            return counter
+    }
+
     return (
         <div className="toolbar">
             <Link className="link" to="/">All Products</Link>
             <Link className="link" to="/create">Create Product</Link>
             <Link className="link" to="/cart">Shopping Cart</Link>
-            <h3 style={{color: "white"}}>Items in cart: {itemsTotal()} Total price: {price}</h3>
+            <h3 style={{color: "white"}}>Items in cart: {itemsTotal()} Total price: {priceTotal()}</h3>
         </div>
     );
 };

@@ -1,10 +1,12 @@
 import {useContext, useRef} from 'react';
 import mainContext from "../Context/MainContext";
 import {v4 as uuid} from 'uuid';
+import {useNavigate} from "react-router-dom";
 
 const CreateProduct = () => {
 
     const {products, setProducts} = useContext(mainContext)
+    const nav = useNavigate()
 
     const titleRef = useRef()
     const descriptionRef = useRef()
@@ -22,9 +24,10 @@ const CreateProduct = () => {
             description: descriptionRef.current.value,
             photo: photoRef.current.value,
             price: Number(priceRef.current.value),
-            quantity: 0
+            quantity: 1
         }
         setProducts([...products, item])
+        nav("/")
     }
 
     return (
